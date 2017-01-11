@@ -64,4 +64,5 @@ if __name__ == '__main__':
 #
 # The algorithm runs at O((n-x)*(n-(x+1))) where x is the zero-indexed iteration of the
 # anagram building loop. However, the first iteration will always run at O(n^2), so
-# this is the aproximate runtime.
+# this is the aproximate runtime. The algorithm runs with space complexity of O(n),
+# because a new Anagram object is created for every character in the substr t.
