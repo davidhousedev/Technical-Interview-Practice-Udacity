@@ -13,13 +13,8 @@
 
 def question4(matrix_tree, root, child1, child2):
 
-
-    tree = BinaryTree(matrix_tree, root)
-    # print tree.print_tree()
-    # print tree.search(child1)
-    # print tree.search(child2)
+    tree = TreelessBST(matrix_tree, root)
     ancestor = tree.find_ancestor(child1, child2)
-    # print 'Found common ancestor: {}'.format(ancestor)
     return ancestor
 
 
@@ -29,19 +24,10 @@ class Node(object):
         self.left = None
         self.right = None
 
-class BinaryTree(object):
+class TreelessBST(object):
     def __init__(self, matrix, root):
-        self.root = self._add_node(matrix, root)
-
-    def _add_node(self, matrix, idx):
-        new_node = Node(idx)
-        for chi_idx, child in enumerate(matrix[idx]):
-            if child:  # True if child is 1
-                if chi_idx < idx:
-                    new_node.left = self._add_node(matrix, chi_idx)
-                else:
-                    new_node.right = self._add_node(matrix, chi_idx)
-        return new_node
+        self.root = root
+        self.matrix = matrix
 
     def find_ancestor(self, num1, num2):
         ''' Finds search paths for both search nums and returns their
@@ -56,41 +42,43 @@ class BinaryTree(object):
                 ancestor = cur1
         return ancestor
 
+    def search(self, value):
+        traversal = []
+        return self._search_node(self.root, value, traversal)
 
-
-    def search(self, find_val):
-        ''' Searches for param:num and returns traversal path as a string '''
-        return self._search_node(self.root, find_val, [])
-
-    def _search_node(self, node, val, traversal):
-        traversal += [node.value]
-        if node.value == val:
+    def _search_node(self, node_idx, value, traversal):
+        traversal += [node_idx]
+        print traversal
+        if node_idx == value:
             return traversal
-        if not node.left and not node.right:
+        if value < node_idx:
+            left = self._get_left_path(self.matrix[node_idx])
+            print 'continuing search with left index: {}'.format(left)
+            if type(left) == int:  # Ensure index exists
+                return self._search_node(left, value, traversal)
+        if value > node_idx:
+            right = self._get_right_path(self.matrix[node_idx])
+            print 'continuing search with right index: {}'.format(right)
+            if type(right) == int:  # Ensure index exists
+                return self._search_node(right, value, traversal)
+
+    def _get_left_path(self, node):
+        ''' Get the index of the first 1 in node, searching from the left '''
+        # Utilize try/except to avoid value error if no 1 is found
+        try:
+            idx = node.index(1)
+            return idx
+        except:
             return None
-        if val < node.value and node.left:
-            return self._search_node(node.left, val, traversal)
-        if val > node.value and node.right:
-            return self._search_node(node.right, val, traversal)
-        return None
 
-    def print_tree(self):
-        """Print out all tree nodes
-        as they are visited in
-        a pre-order traversal."""
-        return self.preorder_print(self.root)
-
-    def preorder_print(self, start):
-        """Helper method - use this to create a
-        recursive print solution."""
-        printed = str(start.value)
-        if not start.left and not start.right:
-            printed = '({})'.format(start.value)
-        if start.left:
-            printed += '-' + self.preorder_print(start.left)
-        if start.right:
-            printed += '-' + self.preorder_print(start.right)
-        return printed
+    def _get_right_path(self, node):
+        ''' Get the index of the first 1 in node, searching from the right '''
+        # Utilize try/except to avoid value error if no 1 is found
+        try:
+            idx = (len(node) - 1) - node[::-1].index(1)
+            return idx
+        except:
+            return None
 
 
 if __name__ == '__main__':
@@ -133,13 +121,16 @@ if __name__ == '__main__':
 
 # Notes
 #
-# This algorithm translates a matrix representation of a binary tree
-# to a binary tree, then uses depth-first searching to find two
-# values within the tree. Should those values be found, internal
-# methods read the DFS traversal paths until it finds the least
-# common ancestor of both values.
+# This algorithm reads a matrix representation of a binary search
+# tree (BST) to determine the lowest common ancestor (LST) of two
+# points. The logic relies on a recursive depth first search method
+# which returns the traversal path between root and the specified
+# value. Once the traversal paths of both query values have been found,
+# values from both traversals are extracted until the first common
+# value is found, which will be the LST.
 #
-# There are multiple operations that occur for each node in the
-# binary tree (n), such as building the binary tree, and recursive
-# DFS in the worst case. However, because worst case is aproximately
-# O(3n), the aproximate time complexity is O(n).
+# This algorithm achieves low time complexity and space complexity
+# by reading the BST matrix in-place. Time complexity is limited by
+# the utilization of depth first search, which evaluates to
+# O(n log n). Space complexity is kept low, with an average of
+# O(n), where n is
