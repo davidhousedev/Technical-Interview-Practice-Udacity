@@ -132,5 +132,8 @@ if __name__ == '__main__':
 # This algorithm achieves low time complexity and space complexity
 # by reading the BST matrix in-place. Time complexity is limited by
 # the utilization of depth first search, which evaluates to
-# O(n log n). Space complexity is kept low, with an average of
-# O(n), where n is
+# O(n log n). The most intensive use of space is in the private
+# method TreelessBST._get_right_path when a BST node is reversed.
+# However, this reversed node has a limited scope and expires
+# when its method returns. Thus, space complexity is aproximated
+# to constant time O(1) in the worst case.
