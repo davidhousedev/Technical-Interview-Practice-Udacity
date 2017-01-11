@@ -7,15 +7,14 @@
 #     self.next = None
 
 def question5(ll, m):
-    cur = ll
-    prev = None
-    while cur:  # Advance cursor through complete ll
-        cur.prev = prev  # For each node, add a pointer to the previous node
-        prev = cur
-        cur = cur.next
-    for num in xrange(m - 1):
-        prev = prev.prev  # Return through previous nodes until m is reached
-    return prev.data
+    end_pointer = ll
+    mid_pointer = ll
+    for num in xrange(m):
+        end_pointer = end_pointer.next  # Advance ll end tracker
+    while end_pointer:  # Advance end pointer through complete ll
+        end_pointer = end_pointer.next
+        mid_pointer = mid_pointer.next
+    return mid_pointer.data
 
 class Node(object):
   def __init__(self, data):
@@ -33,20 +32,28 @@ if __name__ == '__main__':
         current_node.next = new_node
         current_node = new_node
     print 'Created LL'
-    question5(root, 3)
+    print question5(root, 3)
 
 # Notes
 #
-# This algorithm returns the data at a linked list node that is mth number
-# from the end. It achieves this by iterating through every item of a
-# linked list, and inserting pointers to the previous items of the list
-# until it reaches the end, effectively transforming a singly-linked list to
-# a doubly-linked list. From the final node, it traverses back through the
-# list until it finds the desired node.
+# This second iteration of a linked list traversal algorithm
+# utilizes two pointers to systematically advance through a
+# linked list, such that the previous pointer will always
+# come to rest at the mth node from the end.
 #
-# This algorithm runs with a worst case time complexity of O(2n), in the case
-# where the user's prompt returns data from the linked list's root node.
-# However, this worst case is aproximated to O(n) where n is the number of
-# items in the linked list. Notably, this algorithm achieves O(n) without
-# implementing any additional data structures, achiving space complexity in
-# constant time O(1).
+# The algorithm starts by advancing a ll end tracker to node
+# m-1 of the list. At this point, the distance between the end
+# pointer and the mid pointer--which still resides at the root
+# node-- is equivilant to the distance between the mth node
+# and the end of the list, plus one. Both pointers then advance
+# through the list until the end pointer is set to None (or,
+# the end node plus one). The distance between the two pointers
+# has been maintained, so the mid pointer is now residing at
+# the mth node from the end of the list. Finally, the mid
+# pointer's data is returned.
+#
+# This algorithm achieves time complexity of O(n), because it will
+# always have to iterate through every element of the linked list
+# in order to find the end. Notably, it achieves space complexity
+# in constant time O(1) because only two variables are declared
+# regardless of the size of the linked list.
