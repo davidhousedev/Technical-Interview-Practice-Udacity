@@ -45,7 +45,15 @@ class Anagram:
         return bool(t in self.check_str)
 
 if __name__ == '__main__':
+    print 'TEST 1: Searching for "dcba" in a string that contains "abcd"'
+    print 'Should return True'
     print question1('93845093809384509834abcd129832109', 'dcba')
+    print 'TEST 2: Searching for "abcd" in a string that contains "abcd"'
+    print 'Should return True'
+    print question1('93845093809384509834abcd129832109', 'abcd')
+    print 'TEST 3: Searching for "dcba" in string "zzzz"'
+    print 'Should return False'
+    print question1('zzzz', 'dcba')
 
 
 # Notes

@@ -31,8 +31,16 @@ if __name__ == '__main__':
         new_node = Node(num + 2)
         current_node.next = new_node
         current_node = new_node
-    print 'Created LL'
+    print 'Created LL with the vals 1=>2=>3=>4=>5'
+    print 'TEST 1: Looking for 3rd value from end'
+    print 'Result should be 3'
     print question5(root, 3)
+    print 'TEST 2: Looking for 1st value from end'
+    print 'Result should be 5'
+    print question5(root, 1)
+    print 'TEST 3: Looking for 5rd value from end'
+    print 'Result should be 1'
+    print question5(root, 5)
 
 # Notes
 #

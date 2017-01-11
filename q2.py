@@ -37,7 +37,15 @@ def palindrome_helper(test_str, idx, double_mid=None):
 
 
 if __name__ == '__main__':
+    print 'TEST 1: searching "abbaracecar5abcd" for longest palindrome'
+    print 'Should return "racecar"'
     print question2('abbaracecar5abcd')
+    print 'TEST 2: searching "abbar4cecar5abcd" for longest palindrome'
+    print 'Should return "abba"'
+    print question2('abbar4cecar5abcd')
+    print 'TEST 3: searching "abcdefg" for longest palindrome'
+    print 'Should return "a"'
+    print question2('abcdefg')
 
 # Notes
 # This algorithm discovers the longest palindrome by examining the characters

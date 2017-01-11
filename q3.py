@@ -1,9 +1,15 @@
 # Question 3
 # Given an undirected graph G, find the minimum spanning tree within G. A minimum spanning tree connects all vertices in a graph with the smallest possible total weight of edges. Your function should take in and return an adjacency list structured like this:
 
-start_input = {'A': [('B', 2)],
-               'B': [('A', 2), ('C', 5), ('D', 3)],
-               'C': [('B', 5), ('D', 3)]}
+input1 = {'A': [('B', 2)],
+          'B': [('A', 2), ('C', 5)],
+          'C': [('B', 5)]}
+input2 = {'A': [('B', 2)],
+          'B': [('A', 2), ('C', 5), ('D', 3)],
+          'C': [('B', 5), ('D', 3)]}
+input3 = {'A': [('B', 2), ('C', 1)],
+          'B': [('A', 2), ('C', 5), ('D', 3)],
+          'C': [('B', 5), ('D', 3), ('A', 1)]}
 # Vertices are represented as unique strings. The function definition should be question3(G)
 
 
@@ -111,7 +117,23 @@ class Graph(object):
 
 
 if __name__ == '__main__':
-    print question3(start_input)
+    print '======'
+    print 'TEST 1: Create MST for:'
+    print input1
+    print 'Result should be identical to input'
+    print question3(input1)
+    print '======'
+    print 'TEST 2: Create MST for:'
+    print input2
+    print 'Result should ignore connection between B and C'
+    print question3(input2)
+    print '======'
+    print 'TEST 3: Create MST for:'
+    print input3
+    print 'Result should connect A to C, and should ignore connection between B and C'
+    print question3(input3)
+    print '======'
+
 
 # Notes
 #

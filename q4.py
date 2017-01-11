@@ -94,6 +94,18 @@ class BinaryTree(object):
 
 
 if __name__ == '__main__':
+    print 'Test 1: Testing BST with root as the least common ancestor (LST)'
+    print 'Result should be 3'
+    print question4([[0, 1, 0, 0, 0],
+                     [0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0],
+                     [1, 0, 0, 0, 1],
+                     [0, 0, 0, 0, 0]],
+                    3,
+                    1,
+                    4)
+    print 'Test 2: Testing BST with LST to the right of root'
+    print 'Result should be 5'
     print question4([[0, 1, 0, 0, 0, 0, 0, 0],
                      [0, 0, 0, 0, 0, 0, 0, 0],
                      [0, 0, 0, 0, 0, 0, 0, 0],
@@ -105,6 +117,19 @@ if __name__ == '__main__':
                     3,
                     4,
                     6)
+    print 'Test 3: Testing BST with LST to the left of root'
+    print 'Result should be 1'
+    print question4([[0, 0, 0, 0, 0, 0, 0, 0],
+                     [1, 0, 1, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 1, 0, 0, 0, 1, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 1, 0, 1, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0],
+                     [0, 0, 0, 0, 0, 0, 0, 0]],
+                    3,
+                    0,
+                    1)
 
 # Notes
 #
