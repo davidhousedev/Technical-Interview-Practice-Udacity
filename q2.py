@@ -47,4 +47,7 @@ if __name__ == '__main__':
 # either end of the string.
 #
 # This algorithm is only performing its operations once for each character of
-# the input string. Thus, it has an aproximate runtime of O(n).
+# the input string. Thus, it has an aproximate runtime of O(n). The algorithm's
+# aproximate worst case space complexity is O(n), in the case that the provided
+# string is a complete palindrome. In this case, the program's string splicing
+# logic on line 31 will create a new string that is n chars long.

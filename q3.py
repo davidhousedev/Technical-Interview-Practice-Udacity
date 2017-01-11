@@ -138,4 +138,7 @@ if __name__ == '__main__':
 # This implementation of Prim's algorithm is limited by the sorting algorithm
 # used to determine the minimum elegible edge. Because Python's .sort()
 # implementation runs at O(n log n), it is also the average time complexity
-# of the overall algorithm.
+# of the overall algorithm. The algorithm's worst case space complexity is
+# aproximately O(n) where n is the number of adjacencies in the input adjacency
+# list. The true space complexity is much closer to O(2n + n) due to the need for
+# nodes and edges to connect them. However, this aproximates to O(n).
